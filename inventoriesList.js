@@ -1,6 +1,6 @@
-async function getInventories ( ) {
+async function getInventories ( warehouse) {
     
-    let url = `https://inventura.flexibee.eu/v2/c/firma3/inventura/?detail=full&limit=1000`
+    let url = `https://inventura.flexibee.eu/v2/c/firma3/inventura/%28sklad%20%3D%20%22${warehouse}%22%29?detail=full&limit=1000`
     const response = await fetch ( url, {
         method: 'GET',
         headers: {
