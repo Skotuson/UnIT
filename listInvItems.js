@@ -61,7 +61,7 @@ async function getInvItems() {
     const count = itm['mnozMjReal'];
     const id = itm["id"];
 
-    document.querySelector("#tableBody").innerHTML += `<td>${itemName}</td><td><input type="number" id="id_${id}" value=${count} data-count-before="${count}"></td><td><button type="button" onclick="updateCount(${id})">Ulozit</button</td>`
+    document.querySelector("#tableBody").innerHTML += `<td>${itemName}</td><td><input type="number" style="width: 50px;" id="id_${id}" value=${count} data-count-before="${count}"></td><td><button type="button" class="btn btn-primary" onclick="updateCount(${id})">Uložit</button</td>`
 
     document.querySelector("#tableBody").innerHTML += "</tr>";
   }

@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-#warehouse_select, #warehouse_select_update {
+#warehouse_select, #warehouse_select_update, #warehouse_select_inventure {
   margin-right: 10px;
   border: 2px solid black;
   border-radius: 4px;

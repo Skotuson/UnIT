@@ -19,3 +19,8 @@ form {
   font-size: 1em;
   margin-top: 20px;
 }
+
+.num-input {
+  width: 20px;
+  color: red;
+}
