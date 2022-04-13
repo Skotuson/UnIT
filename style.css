@@ -1,15 +1,52 @@
+
+
 #wrapper {
   display:flex;
   flex-direction: column;
   justify-content: center;
-  width: 30%;
+  width: 600px;
   background-color: rgb(226, 226, 226);
   border: 2px solid black;
+  border-radius: 15px;
   padding: 20px;
   margin: 25px auto;
   text-align: center;
 }
 
-h1 {
-  margin-bottom: 30px
+#quote {
+  margin-bottom: 30px;
+  font-style: italic;
+  font-size: 1.1em;
+}
+
+#warehouse_select_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#warehouse_select {
+  margin-right: 10px;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding: 6px;
+}
+
+.margin-add {
+  margin: 4px;
+}
+
+@media only screen and (max-width: 660px) {
+  #wrapper {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    background-color: rgb(226, 226, 226);
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 25px auto;
+    text-align: center;
+  }
 }

@@ -13,9 +13,10 @@
   <body>
     <div id="wrapper">
       <h1>Turisti Inventurují</h1>
+      <span id="quote">"Inventury snadno a rychle"</span>
       <h3>Vyber akci:</h3>
       <form>
-        <button type="button" id="create_inventory" class="btn btn-primary" data-toggle="modal" data-target="#warehouse_create">Vytvořit Inventuru</button>
+        <button type="button" id="create_inventory" class="btn btn-primary margin-add" data-toggle="modal" data-target="#warehouse_create">Vytvořit Inventuru</button>
         <button type="button" id="update_inventory" class="btn btn-primary" data-toggle="modal" data-target="#warehouse_update">Upravit Inventuru</button>
       </form>
 
@@ -32,6 +33,8 @@
               <form id="warehouse_select_form">
                 <select id="warehouse_select">
                   <option value="">Vyber Sklad</option>
+                  <option value="1">Sklad</option>
+                  <option value="2">Sklad 3</option>
                 </select>
                 <button type="submit" class="btn btn-primary" id="warehouse_select_create;">Vytvořit Inventuru</button>
               </form>
