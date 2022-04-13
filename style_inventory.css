@@ -1,3 +1,4 @@
+
 #wrapper {
   display:flex;
   flex-direction: column;
@@ -7,4 +8,10 @@
   border: 2px solid black;
   padding: 20px;
   margin: 25px auto;
+}
+h1, form {
+  text-align: center;
+}
+form {
+  margin: 20px 0 20px 0;
 }
