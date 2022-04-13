@@ -17,14 +17,13 @@ async function getItem(ean) {
         }
     });
 
-    if (!response.ok) {
-        alert("No EAN");
+    if ( ! response.ok ) {
+        alert ( "EAN doesn't exist" );
+
         return;
     }
 
     const objJSON = await response.json();
-
-    console.log(objJSON.winstrom['skladova-karta'][0].cenik[0].nazev)
 
     let wareCard = objJSON.winstrom['skladova-karta'][0].id;
 
@@ -45,8 +44,8 @@ async function isInInventory(inventoryID, wareCard) {
         }
     });
 
-    if (!response.ok) {
-        alert("Chyba isInInventory");
+    if ( ! response.ok ) {
+        alert ( "Fetch failed!" );
         return;
     }
 
@@ -117,8 +116,9 @@ async function addToInventory(inventoryID, warehouse, pricing,
         body: sendJSON
     });
 
-    if (!response.ok) {
-        alert("No EAN");
+    if ( ! response.ok ) {
+        alert ( "Add has failed!" );
+
         return;
     }
 
