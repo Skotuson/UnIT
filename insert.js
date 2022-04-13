@@ -170,5 +170,3 @@ async function deleteFromInventory(idInInventory) {
     getInvItems();
 
 }
-
-delete
