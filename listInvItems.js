@@ -23,7 +23,8 @@ async function updateCount(idInInv) {
   //console.log(itemToUpdate);
   let idPricing = itemToUpdate['cenik@ref'].match(/([^\/]+$)/)[0];
   //console.log(idPricing);
-  addToInventory(itemToUpdate['inventura'], localStorage.getItem("inventory" + itemToUpdate['inventura']), idPricing, itemToUpdate["skladKarta"], itemToUpdate["mnozMjReal"] + (newCount - oldCount), idInInv);
+  let params = new URLSearchParams(location.search);
+  addToInventory(itemToUpdate['inventura'], params.get('warehouse'), idPricing, itemToUpdate["skladKarta"], itemToUpdate["mnozMjReal"] + (newCount - oldCount), idInInv);
 }
 
 async function getInvItems() {
