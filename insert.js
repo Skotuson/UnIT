@@ -6,7 +6,7 @@ let ean = 10007;
 async function getItem(ean,count=1) {
     let params = new URLSearchParams(location.search);
     let inventoryID = params.get('id');
-    let warehouse = localStorage.getItem("inventory" + inventoryID);
+    let warehouse = params.get('warehouse');
 
     let url = `https://inventura.flexibee.eu/v2/c/firma3/skladova-karta/%28sklad%20%3D%20%22${warehouse}%22%20and%20ucetObdobi%20%3D%20%22code%3A${BILLING_RANGE}%22%20and%20cenik%3D%22ean%3A${ean}%22%29?detail=custom:cenik(nazev,kod,eanKod)&includes=/skladova-karta/cenik`;
     const response = await fetch(url, {
