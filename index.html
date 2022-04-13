@@ -1,45 +1,73 @@
 <!doctype html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
 
-    <title>Turisti Warehouse App</title>
+    <title>Turisti Inventurují</title>
   </head>
   <body>
-    <h1>Turisti Warehouse App</h1>
-    <h3>Select action:</h3>
-    <form>
-      <button type="button" id="create_inventory" class="btn btn-primary" data-toggle="modal" data-target="#warehouse_modal">Create Inventory</button>
-      <button type="button" id="update_inventory" class="btn btn-primary">Update Inventory</button>
-    </form>
+    <div id="wrapper">
+      <h1>Turisti Inventurují</h1>
+      <h3>Vyber akci:</h3>
+      <form>
+        <button type="button" id="create_inventory" class="btn btn-primary" data-toggle="modal" data-target="#warehouse_create">Vytvořit Inventuru</button>
+        <button type="button" id="update_inventory" class="btn btn-primary" data-toggle="modal" data-target="#warehouse_update">Upravit Inventuru</button>
+      </form>
 
-    <div class="modal fade" id="warehouse_modal" tabindex="-1" role="dialog" aria-labelledby="warehouse_title" aria-hidden="true">
+      <div class="modal fade" id="warehouse_create" tabindex="-1" role="dialog" aria-labelledby="warehouse_title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Výběr Skladu</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="warehouse_select_form">
+                <select id="warehouse_select">
+                  <option value="">Vyber Sklad</option>
+                </select>
+                <button type="submit" class="btn btn-primary" id="warehouse_select_create;">Vytvořit Inventuru</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="warehouse_update" tabindex="-1" role="dialog" aria-labelledby="warehouse_title" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Select Warehouse</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Výběr Skladu</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form id="warehouse_select_form">
-              <select id="warehouse_select">
-                <option value="">Select Warehouse</option>
+            <form id="warehouse_select_form_update">
+              <select id="warehouse_select_update">
+                <option value="">Vyber Sklad</option>
               </select>
-              <button type="submit" class="btn btn-primary" id="warehouse_select_create;">Create Inventory</button>
+              <button type="submit" class="btn btn-primary" id="warehouse_select_create;">Upravit Inventuru</button>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button> 
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
