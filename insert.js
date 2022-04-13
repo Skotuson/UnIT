@@ -125,5 +125,3 @@ async function addToInventory ( inventoryID, warehouse, pricing,
 
 
 }
-
-getItem(ean);
