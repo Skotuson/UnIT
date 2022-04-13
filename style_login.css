@@ -4,4 +4,18 @@
 
 h1 {
   font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.welcome_first {
+  font-size: 0.8em;
+}
+
+form {
+  font-size: 1.2em;
+}
+
+.bigger_font {
+  font-size: 1em;
+  margin-top: 20px;
 }
