@@ -36,8 +36,6 @@ async function newInventory ( warehouseID ) {
         alert ( "Created je 0!" );
         return
     }
-    
-    //localStorage.setItem(`inventory${objJSON.winstrom.results[0].id}`, warehouseID );
-
+  
     window.location.replace(`/inventory.html?id=${objJSON.winstrom.results[0].id}&warehouse=${warehouseID}`);
 }
