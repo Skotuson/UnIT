@@ -14,7 +14,7 @@ async function newInventory ( warehouseID ) {
             "winstrom": {
               "inventura": [
                 {
-                  "popisInventury": "User description (This one without ID create record)",
+                  "popisInventury": "Popis",
                   "typInventury": "Testovací inventura",
                   "datZahaj": `${new Date().toISOString().slice(0,10)}`,
                   "sklad": `${warehouseID}`,
@@ -31,6 +31,7 @@ async function newInventory ( warehouseID ) {
     }
 
     const objJSON = await response.json(); 
+
     if ( ! objJSON.winstrom.stats.created ) {
         alert ( "Created je 0!" );
         return
