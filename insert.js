@@ -3,7 +3,8 @@ const BILLING_RANGE = "2022";
 
 let ean = 10007;
 
-async function getItem(ean,count=1) {
+async function getItem(ean) {
+
     let params = new URLSearchParams(location.search);
     let inventoryID = params.get('id');
     let warehouse = params.get('warehouse');
@@ -30,7 +31,7 @@ async function getItem(ean,count=1) {
     let tuple = await isInInventory(inventoryID, wareCard);
     addToInventory(inventoryID, warehouse,
         objJSON.winstrom['skladova-karta'][0].cenik[0].id,
-        objJSON.winstrom['skladova-karta'][0].cenik[0].id, count + tuple.count, tuple.id);
+        wareCard, 1 + tuple.count, tuple.id);
 }
 
 async function isInInventory(inventoryID, wareCard) {
@@ -73,6 +74,12 @@ async function isInInventory(inventoryID, wareCard) {
 
 async function addToInventory(inventoryID, warehouse, pricing,
     wareCard, count, idInInventory) {
+
+      if(count==0){
+        deleteFromInventory(idInInventory)
+        return;
+      }
+
     let sendJSON = JSON.stringify({
         "winstrom": {
             "inventura-polozka": [
@@ -132,3 +139,36 @@ async function addToInventory(inventoryID, warehouse, pricing,
     getInvItems();
 
 }
+
+
+async function deleteFromInventory(idInInventory) {
+
+
+    let url = `https://inventura.flexibee.eu/v2/c/firma3/inventura-polozka/${idInInventory}`
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'accept': 'application/json',
+            'Authorization': 'Basic YWRtaW4zOmFkbWluM2FkbWluMw=='
+        }
+    });
+
+    if ( ! response.ok ) {
+        alert ( "Delete has failed!" );
+
+        return;
+    }
+
+    let objJSON = await response.json();
+
+    if ((objJSON.winstrom.stats.deleted) != 1) {
+        alert("Deleted je 0!");
+        return
+    }
+
+    getInvItems();
+
+}
+
+delete
