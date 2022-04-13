@@ -3,7 +3,7 @@ const BILLING_RANGE = "2022";
 
 let ean = 10007;
 
-async function getItem(ean) {
+async function getItem(ean,count=1) {
     let params = new URLSearchParams(location.search);
     let inventoryID = params.get('id');
     let warehouse = localStorage.getItem("inventory" + inventoryID);
@@ -30,7 +30,7 @@ async function getItem(ean) {
     let tuple = await isInInventory(inventoryID, wareCard);
     addToInventory(inventoryID, warehouse,
         objJSON.winstrom['skladova-karta'][0].cenik[0].id,
-        objJSON.winstrom['skladova-karta'][0].cenik[0].id, 1 + tuple.count, tuple.id);
+        objJSON.winstrom['skladova-karta'][0].cenik[0].id, count + tuple.count, tuple.id);
 }
 
 async function isInInventory(inventoryID, wareCard) {
