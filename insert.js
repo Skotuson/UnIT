@@ -1,10 +1,7 @@
 
 const BILLING_RANGE  = "2022";
 
-let ean           = 10001,
-    inventory     = localStorage.getItem("inventoryID"),
-    pricing       = localStorage.getItem("cenikID"),
-    wareCard      = localStorage.getItem("skladovaKartaID");
+let ean           = 10007;
 
 async function getItem ( ean ) {
     let params = new URLSearchParams(location.search);
@@ -26,15 +23,105 @@ async function getItem ( ean ) {
     }
 
     const objJSON = await response.json();
-    console.log(objJSON.winstrom['skladova-karta']);
-    localStorage.setItem("skladovaKartaID", objJSON.winstrom['skladova-karta'][0].id)
-    localStorage.setItem("cenikID", objJSON.winstrom['skladova-karta'][0].cenik[0].id)
+
     console.log(objJSON.winstrom['skladova-karta'][0].cenik[0].nazev)
+
+    let wareCard = objJSON.winstrom['skladova-karta'][0].id;
+
+    let tuple = await isInInventory(inventoryID, wareCard);
+    addToInventory( inventoryID, warehouse, 
+        objJSON.winstrom['skladova-karta'][0].cenik[0].id,
+        objJSON.winstrom['skladova-karta'][0].cenik[0].id, 1 + tuple.count, tuple.id );
 }
 
-function addToInventory ( inventory, warehouse, pricing, wareCard, count ) {
+async function isInInventory ( inventoryID, wareCard ) {
+    let url = `https://inventura.flexibee.eu/v2/c/firma3/inventura-polozka/%28inventura%20%3D%20%27${inventoryID}%27%20and%20skladKarta%3D%27${wareCard}%27%29?detail=full`
     
-    console.log();
+    const response = await fetch ( url, {
+        method: 'GET',
+        headers: {
+            'accept':'application/json',
+            'Authorization':'Basic YWRtaW4zOmFkbWluM2FkbWluMw=='
+        }
+    } );
+
+    if ( ! response.ok ) {
+        alert ( "Chyba isInInventory" );
+        return;
+    }
+
+    const objJSON = await response.json();
+    let id = objJSON.winstrom['inventura-polozka'][0].id;
+    let count = objJSON.winstrom['inventura-polozka'][0].mnozMjReal;
+    if(id){
+        return {
+            id: id,
+            count: count 
+        };
+    }
+    
+    return {
+        id: -1,
+        count: 0
+    };
 }
 
-getItem(ean);
+async function addToInventory ( inventoryID, warehouse, pricing, 
+                                wareCard, count, idInInventory ) {
+    let sendJSON = JSON.stringify ({
+        "winstrom": {
+          "inventura-polozka": [
+            {
+              "id": idInInventory,
+              "inventura": inventoryID,
+              "sklad": warehouse,
+              "cenik": pricing,
+              "skladKarta": wareCard,
+              "mnozMjReal": count
+            }
+          ]
+        }
+      });
+
+    if ( idInInventory == -1 )
+      sendJSON = JSON.stringify ({
+        "winstrom": {
+          "inventura-polozka": [
+            {
+              "inventura": inventoryID,
+              "sklad": warehouse,
+              "cenik": pricing,
+              "skladKarta": wareCard,
+              "mnozMjReal": count
+            }
+          ]
+        }
+      })
+
+    let url = `https://inventura.flexibee.eu/v2/c/firma3/inventura-polozka`
+
+    const response = await fetch ( url, {
+        method: 'POST',
+        headers: {
+            'accept':'application/json',
+            'Authorization':'Basic YWRtaW4zOmFkbWluM2FkbWluMw==',
+            'Content-Type':'application/json'
+        },
+
+        body: sendJSON
+    } );
+
+    if ( ! response.ok ) {
+        alert ( "No EAN" );
+        return;
+    }
+
+    let objJSON = await response.json();
+
+    if ( ( objJSON.winstrom.stats.created + objJSON.winstrom.stats.updated ) != 1 ) {
+        alert ( "Created je 0!" );
+        return
+    }
+
+
+}
