@@ -1,6 +1,10 @@
 
 window.onload = async function () {
 
+  /*  if (!localStorage.getItem("basicAuth")) {
+     window.location.replace("/login");
+   } */
+
   const warehouses = await getWarehouses();
 
   //set options to select

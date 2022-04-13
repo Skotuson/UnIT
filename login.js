@@ -5,4 +5,6 @@ document.querySelector("#login").addEventListener("submit", e => {
   const pass = document.querySelector("login_pswd").value;
 
   localStorage.setItem("basicAuth", base64.encode(`${usr}:${pass}`));
+
+  window.location.replace("/index.html");
 });
