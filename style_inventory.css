@@ -11,3 +11,17 @@ form {
 #inventory_add {
   margin-top: 5px;
 }
+
+.table_wrap {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 600px;
+  background-color: rgb(226, 226, 226);
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 25px;
+  margin: 25px auto;
+  text-align: center;
+  background-color: rgb(203, 226, 253);
+}
