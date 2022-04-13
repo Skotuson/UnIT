@@ -6,4 +6,5 @@ document.querySelector("#ean_form").addEventListener('submit', async (e) => {
   const eanCode = document.querySelector('#ean_code').value;
   getItem(eanCode);
   document.querySelector('#ean_code').value = '';
+  //getInvItems();
 });
