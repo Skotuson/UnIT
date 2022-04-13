@@ -4,13 +4,13 @@
   font-size: 1.1em;
 }
 
-#warehouse_select_form {
+#warehouse_select_form, #warehouse_select_form_update {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#warehouse_select {
+#warehouse_select, #warehouse_select_update {
   margin-right: 10px;
   border: 2px solid black;
   border-radius: 4px;
