@@ -1,4 +1,31 @@
 
+async function updateCount(idInInv) {
+  const inpt = document.querySelector(`#id_${idInInv}`);
+
+  const newCount = inpt.value;
+  const oldCount = inpt.dataset.countBefore;
+
+  const url = `https://inventura.flexibee.eu/v2/c/firma3/inventura-polozka/${idInInv}`;
+
+  const response = await fetch(url, {
+    headers: {
+      'accept': 'application/json',
+      'Authorization': 'Basic YWRtaW4zOmFkbWluM2FkbWluMw=='
+    },
+  });
+
+  if (!response.ok) {
+    alert("couldnt find item");
+    return;
+  }
+  const respObj = await response.json();
+  const itemToUpdate = await respObj.winstrom["inventura-polozka"][0];
+  //console.log(itemToUpdate);
+  let idPricing = itemToUpdate['cenik@ref'].match(/([^\/]+$)/)[0];
+  //console.log(idPricing);
+  addToInventory(itemToUpdate['inventura'], localStorage.getItem("inventory" + itemToUpdate['inventura']), idPricing, itemToUpdate["skladKarta"], itemToUpdate["mnozMjReal"] + (newCount - oldCount), idInInv);
+}
+
 async function getInvItems() {
   let params = new URLSearchParams(location.search);
   const invId = params.get('id');
@@ -25,13 +52,15 @@ async function getInvItems() {
   //itemsTable.innerHTML = "";
   document.querySelector("#tableBody").innerHTML = "";
   for (itm of items) {
+    //console.log(itm)
     /* console.log(itm['cenik@showAs']);
     console.log(itm['mnozMjReal']); */
     document.querySelector("#tableBody").innerHTML += "<tr>"
     const itemName = itm['cenik@showAs'];
     const count = itm['mnozMjReal'];
+    const id = itm["id"];
 
-    document.querySelector("#tableBody").innerHTML += `<td>${itemName}</td><td>${count}</td><td>X</td>`
+    document.querySelector("#tableBody").innerHTML += `<td>${itemName}</td><td><input type="number" id="id_${id}" value=${count} data-count-before="${count}"></td><td><button type="button" onclick="updateCount(${id})">Ulozit</button</td>`
 
     document.querySelector("#tableBody").innerHTML += "</tr>";
   }
