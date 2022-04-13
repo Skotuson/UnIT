@@ -69,6 +69,13 @@ async function getInvItems() {
 
 window.onload = async function () {
   getInvItems();
+  const whs = await getWarehouses();
+  let params = new URLSearchParams(location.search);
+  let warehouseID = params.get("warehouse");
+  for ( let wh of whs ) {
+    if ( wh.id == warehouseID )
+      document.querySelector("#warehouse_name").innerHTML = wh.nazev;
+  }
 }
 
 /* 
