@@ -1,4 +1,3 @@
-let OK = 200;
 
 let ean           = 10001,
     inventory     = 1,
@@ -17,7 +16,7 @@ async function getItem ( warehouse, billingRange, ean ) {
         }
     } );
 
-    if ( response.status != OK ) {
+    if ( ! response.ok ) {
         alert ( "No EAN" );
         return;
     }
@@ -29,5 +28,3 @@ async function getItem ( warehouse, billingRange, ean ) {
 function addToInventory ( inventory, warehouse, pricing, wareCard, count ) {
 
 }
-
-getItem(warehouse, billingRange, ean);
