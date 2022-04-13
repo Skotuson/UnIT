@@ -10,7 +10,7 @@ async function getWarehouses ( ) {
     } );
 
     if ( ! response.ok ) {
-        alert ( "No EAN" );
+        alert ( "No warehouse found!" );
         return;
     }
 
