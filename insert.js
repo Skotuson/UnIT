@@ -33,7 +33,7 @@ async function getItem ( ean ) {
         objJSON.winstrom['skladova-karta'][0].cenik[0].id, 1 );
 }
 
-function addToInventory ( inventoryID, warehouse, pricing, wareCard, count ) {
+async function addToInventory ( inventoryID, warehouse, pricing, wareCard, count ) {
   
     let url = `https://inventura.flexibee.eu/v2/c/firma3/inventura-polozka`
 
@@ -60,7 +60,19 @@ function addToInventory ( inventoryID, warehouse, pricing, wareCard, count ) {
           })
     } );
 
-    console.log();
+    if ( ! response.ok ) {
+        alert ( "No EAN" );
+        return;
+    }
+
+    let objJSON = await response.json();
+
+    if ( ! objJSON.winstrom.stats.created ) {
+        alert ( "Created je 0!" );
+        return
+    }
+
+    
 }
 
 getItem(ean);
